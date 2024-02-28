@@ -18,6 +18,8 @@ class App:
         self.logger = get_logger()
         self.splunk_api = self.create_splunk_api()
 
+        self.splunk_api.send_system_message()
+
         self.config = Config(self.splunk_api)
         self.settings_config = self.config.get_settings_config()
         self.bitwarden_api_key = self.config.get_bitwarden_api_key()

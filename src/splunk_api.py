@@ -82,6 +82,13 @@ class SplunkApi:
 
         return storage_password.clear_password
 
+    def send_system_message(self):
+        self.service.messages.create(name='bitwarden_event_logs', body={
+            "name": 'bitwarden_event_logs',
+            "value": 'Bitwarden Event Logs started',
+            "severity": 'info'
+        })
+
     def __get_storage_collection(self, collection_id: str) -> KVStoreCollection:
         if collection_id not in self.service.kvstore:
             raise Exception('kvstore collection %s not found', collection_id)
